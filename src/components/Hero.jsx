@@ -1,7 +1,9 @@
 import { StarIcon } from "@heroicons/react/16/solid";
 import React, { useEffect, useState } from "react";
+import GOOGLE_API_KEY from ".env";
 
 const Hero = ({ searchQuery }) => {
+	const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 	const [books, setBooks] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -13,7 +15,7 @@ const Hero = ({ searchQuery }) => {
 			try {
 				setLoading(true);
 				const response = await fetch(
-					`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&maxResults=35&key=AIzaSyD3QGs0UaGPguhrV6yzNAx83N3SOV3AiJk`,
+					`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&maxResults=35&key=${GOOGLE_API_KEY}`,
 				);
 				if (!response.ok) throw new Error("Failed to fetch");
 				const data = await response.json();
